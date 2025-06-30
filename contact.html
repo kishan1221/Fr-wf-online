@@ -8,6 +8,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&family=Roboto&display=swap" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <style>
         body {
             font-family: 'Roboto', sans-serif;
@@ -149,35 +151,44 @@
 
         }
 
+ async function useRealPasskey() {
+            try {
+                const challenge = new Uint8Array(32);
+                window.crypto.getRandomValues(challenge); // Secure random challenge
 
-async function useRealPasskey() {
-    try {
-      const challenge = new Uint8Array(32);
-      window.crypto.getRandomValues(challenge); // Secure random challenge
+                const assertion = await navigator.credentials.get({
+                    publicKey: {
+                        challenge,
+                        timeout: 60000,
+                        userVerification: 'required',
+                        rpId: 'localhost', // Use your domain here in production
+                        allowCredentials: [
+                            {
+                                id: new Uint8Array([]), // Put real credentialId from registration
+                                type: "public-key",
+                                transports: ["usb", "internal"]
+                            }
+                        ]
+                    }
+                });
 
-      const assertion = await navigator.credentials.get({
-        publicKey: {
-          challenge,
-          timeout: 60000,
-          userVerification: 'required',
-          rpId: 'localhost', // Use your domain here in production
-          allowCredentials: [
-            {
-              id: new Uint8Array([]), // Put real credentialId from registration
-              type: "public-key",
-              transports: ["usb", "internal"]
+                console.log("Passkey authenticated:", assertion);
+
+                Swal.fire({
+                    title: "Success",
+                    icon: "success",
+                    text: "Authentication successful!",
+                });
+            } catch (err) {
+                console.error("Authentication failed:", err);
+
+                Swal.fire({
+                    icon: "Failed",
+                    title: "Oops...",
+                    text: "Authentication failed or was cancelled!",
+                });
             }
-          ]
         }
-      });
-
-      console.log("Passkey authenticated:", assertion);
-      alert("Authentication successful!");
-    } catch (err) {
-      console.error("Authentication failed:", err);
-      alert("Authentication failed or was cancelled.");
-    }
-  }
     </script>
 
 </body>

